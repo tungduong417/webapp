@@ -1,5 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Headlock</title>
+</head>
+
+<body>
+
+<!-- Loading -->
+<div id="loading" style="position:fixed;width:100%;height:100%;background:black;color:white;display:flex;justify-content:center;align-items:center;z-index:9999;">
+🔄 Loading...
+</div>
+
+<!-- Login -->
+<div id="loginBox" style="display:none;position:fixed;width:100%;height:100%;background:linear-gradient(135deg,#0f2027,#2c5364,#00c6ff);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:rgba(255,255,255,0.1);padding:30px;border-radius:20px;text-align:center;color:white;">
+    
+    <div style="font-size:40px;">🔥</div>
+    <h2>Headlock</h2>
+
+    <input id="user" placeholder="Tài khoản">
+    <input id="pass" type="password" placeholder="Mật khẩu">
+    
+    <button onclick="login()">Đăng nhập</button>
+
+    <p id="err" style="color:red;"></p>
+
+  </div>
+</div>
+
+<!-- Sound -->
+<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
+<!-- Script đặt CUỐI -->
 <script>
-document.body.style.display = "none";
+// KHÔNG ẩn body nữa ❌
 
 // loading
 setTimeout(() => {
@@ -15,37 +51,14 @@ function login() {
 
   if (u === "tungduong" && p === "999") {
     document.getElementById("loginBox").style.display = "none";
-    document.body.style.display = "block";
   } else {
     document.getElementById("err").innerText = "Sai ❌";
   }
 }
 </script>
-<div id="loading" style="position:fixed;width:100%;height:100%;background:black;color:white;display:flex;justify-content:center;align-items:center;z-index:9999;">
-🔄 Loading...
-</div>
 
-<div id="loginBox" style="display:none;position:fixed;width:100%;height:100%;background:linear-gradient(135deg,#0f2027,#2c5364,#00c6ff);justify-content:center;align-items:center;z-index:9999;">
-
-  <div style="background:rgba(255,255,255,0.1);padding:30px;border-radius:20px;text-align:center;color:white;">
-    
-    <div style="font-size:40px;">🔥</div>
-    <h2>Headlock</h2>
-
-    <input id="user" placeholder="Tài khoản" style="display:block;margin:10px auto;padding:10px;border-radius:10px;border:none;">
-    <input id="pass" type="password" placeholder="Mật khẩu" style="display:block;margin:10px auto;padding:10px;border-radius:10px;border:none;">
-    
-    <button onclick="login()" style="padding:10px;border-radius:10px;border:none;background:#00c6ff;">Đăng nhập</button>
-
-    <p id="err" style="color:red;"></p>
-
-  </div>
-</div>
-
-<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
+</body>
+</html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
