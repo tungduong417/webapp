@@ -1,1 +1,914 @@
-<h1>OK RỒI 😎</h1>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7c4dff;
+            --primary-light: #a07cff;
+            --primary-dark: #6200ea;
+            
+            --secondary: #ff4081;
+            --secondary-light: #ff80ab;
+            --secondary-dark: #c51162;
+            
+            --accent-1: #00e5ff;
+            --accent-2: #76ff03;
+            --accent-3: #ff9100;
+            --accent-4: #ff3d00;
+            --accent-5: #641fff;
+            
+            --dark-bg: rgba(18, 18, 24, 0.7);
+            --menu-bg: rgba(25, 25, 35, 0.6);
+            --card-bg: rgba(35, 35, 45, 0.4);
+            
+            --border: rgba(255, 255, 255, 0.15);
+            --border-hover: rgba(255, 255, 255, 0.25);
+            --border-active: rgba(255, 255, 255, 0.4);
+            --border-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+            
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-tertiary: rgba(255, 255, 255, 0.65);
+            
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.25);
+            
+            --font-main: 'Poppins', sans-serif;
+            --font-display: 'Rajdhani', sans-serif;
+            
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            --backdrop-blur: 15px;
+            --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('https://media0.giphy.com/media/oFYKw5OTZBZzVONpUh/200w.gif?cid=6c09b952x3jjmwfq36mchoitm7i1t3g605ylua58iy3bzguv&ep=v1_gifs_search&rid=200w.gif&ct=g') no-repeat center center fixed;
+            background-size: cover;
+            font-family: var(--font-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            z-index: -1;
+        }
+
+        /* Container & Orientation Controls */
+        .menu-container {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .orientation-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: var(--dark-bg);
+            border-radius: var(--radius-lg);
+            padding: 5px;
+            display: flex;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(var(--backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+        }
+
+        .orientation-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-tertiary);
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: var(--transition-fast);
+        }
+
+        .orientation-btn.active {
+            background: var(--primary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .orientation-btn:not(.active):hover {
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .orientation-btn i {
+            font-size: 18px;
+        }
+
+        /* Main Menu Card */
+        .menu-card {
+            background: var(--menu-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            backdrop-filter: blur(var(--backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+            border: 1px solid var(--border);
+            margin-top: 10px;
+            position: relative;
+            transition: var(--transition-normal);
+            max-width: 100%;
+        }
+
+        .menu-header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(
+                rgba(255, 255, 255, 0.1),
+                transparent,
+                rgba(255, 255, 255, 0.05)
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        .menu-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .menu-title-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(to bottom right, var(--accent-1), var(--accent-5));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-title-icon::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: linear-gradient(
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .menu-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-left: 42px;
+            margin-top: -2px;
+        }
+
+        .menu-version {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Menu Content & Grid */
+        .menu-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            transition: var(--transition-normal);
+        }
+
+        /* Orientation: Vertical */
+        .menu-container.vertical .menu-card {
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        .menu-container.vertical .menu-content {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        /* Feature Item Styling */
+        .feature-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(var(--backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+            box-shadow: var(--border-glow);
+        }
+
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--border-gradient);
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .feature-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.15);
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-1);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .feature-item:nth-child(3n+1)::before { background: var(--accent-1); }
+        .feature-item:nth-child(3n+2)::before { background: var(--accent-2); }
+        .feature-item:nth-child(3n+3)::before { background: var(--accent-3); }
+        .feature-item:nth-child(3n+4)::before { background: var(--accent-4); }
+        .feature-item:nth-child(3n+5)::before { background: var(--accent-5); }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-item.active::before {
+            opacity: 1;
+        }
+
+        .feature-info {
+            display: flex;
+            flex-direction: column;
+            color: var(--text-secondary);
+        }
+
+        .feature-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .feature-description {
+            font-size: 11px;
+            opacity: 0.7;
+            max-width: 110px;
+            line-height: 1.3;
+            transition: var(--transition-fast);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .feature-item:hover .feature-name,
+        .feature-item.active .feature-name {
+            color: var(--text-primary);
+        }
+
+        .feature-item:hover .feature-description,
+        .feature-item.active .feature-description {
+            opacity: 0.9;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 38px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition-fast);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            overflow: hidden;
+        }
+        
+        .slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: var(--transition-fast);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: var(--transition-fast);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
+        }
+        
+        input:checked + .slider::after {
+            opacity: 1;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 5px var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(18px);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .feature-item:nth-child(3n+1) input:checked + .slider { background-color: var(--accent-1); }
+        .feature-item:nth-child(3n+2) input:checked + .slider { background-color: var(--accent-2); }
+        .feature-item:nth-child(3n+3) input:checked + .slider { background-color: var(--accent-3); }
+        .feature-item:nth-child(3n+4) input:checked + .slider { background-color: var(--accent-4); }
+        .feature-item:nth-child(3n+5) input:checked + .slider { background-color: var(--accent-5); }
+
+        /* Menu Footer */
+        .menu-footer {
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid var(--border);
+        }
+
+        .menu-footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .menu-footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .menu-footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: var(--transition-fast);
+        }
+
+        .menu-footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: var(--dark-bg);
+            padding: 12px 15px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 280px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            backdrop-filter: blur(var(--backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+        }
+
+        .notification.show {
+            right: 20px;
+        }
+
+        .notification .icon {
+            font-size: 18px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .notification .message {
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-container:not(.vertical) .menu-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .menu-container:not(.vertical) .menu-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .menu-container:not(.vertical) .menu-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-container:not(.vertical) .menu-card {
+                width: 100%;
+            }
+            
+            .menu-title {
+                font-size: 20px;
+            }
+            
+            .menu-content {
+                padding: 15px;
+            }
+            
+            .menu-container.vertical .menu-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container" id="menu-container">
+        <!-- Orientation Toggle -->
+        <div class="orientation-toggle">
+            <button class="orientation-btn active" id="horizontal-btn" data-orientation="horizontal">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="orientation-btn" id="vertical-btn" data-orientation="vertical">
+                <i class="fas fa-th-list"></i>
+            </button>
+        </div>
+        
+        <!-- Tab Controls -->
+        <div class="tab-controls">
+            <button class="tab-btn active" data-tab="features">
+                <i class="fas fa-gamepad"></i> Tính Năng
+            </button>
+            <button class="tab-btn" data-tab="guide">
+                <i class="fas fa-book"></i> Hướng Dẫn
+            </button>
+        </div>
+        
+        <!-- Menu Card -->
+        <div class="menu-card" id="features-tab">
+            <div class="menu-header">
+                <div>
+                    <h1 class="menu-title">
+                        <div class="menu-title-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        Lê Tùng Dương
+                    </h1>
+                    <div class="menu-subtitle">POCTION YIUSOTER MOD GAME UNTINYVERYS</div>
+                </div>
+                <div class="menu-version">v2.5.0</div>
+            </div>
+            
+            <div class="menu-content">
+                <!-- Feature 1 -->
+                <div class="feature-item" data-feature="speed">
+                    <div class="feature-info">
+                        <div class="feature-name">AIMLOCKMode</div>
+                        <div class="feature-description">Tăng Khả Năng Bám Đầu</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-item" data-feature="wallhack">
+                    <div class="feature-info">
+                        <div class="feature-name">AIM MODE</div>
+                        <div class="feature-description">Hỗ Trợ Ghim Đầu Khi Kéo</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-item" data-feature="aimbot">
+                    <div class="feature-info">
+                        <div class="feature-name">AIMHEAD</div>
+                        <div class="feature-description">Tăng Tỉ Lệ Bám Đầu Cao</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-item" data-feature="norecoil">
+                    <div class="feature-info">
+                        <div class="feature-name">NORECOIL80</div>
+                        <div class="feature-description">Hỗ Trợ Đường Đạn Thẳng</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-item" data-feature="infiniteammo">
+                    <div class="feature-info">
+                        <div class="feature-name">TRICK HEAD</div>
+                        <div class="feature-description">Hỗ Trợ Khi Kéo Tâm Ổn Định Hơn</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-item" data-feature="godmode">
+                    <div class="feature-info">
+                        <div class="feature-name">UMP LOCK</div>
+                        <div class="feature-description">Sử Dụng Cho UMP </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 7 -->
+                <div class="feature-item" data-feature="esp">
+                    <div class="feature-info">
+                        <div class="feature-name">FPS BOST </div>
+                        <div class="feature-description">Tăng Fps Khi Chơi Game</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 8 -->
+                <div class="feature-item" data-feature="radar">
+                    <div class="feature-info">
+                        <div class="feature-name">AOTUHESOT</div>
+                        <div class="feature-description">Khi Kéo Sẽ Tự Động Ghim Đầu Chặt</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 9 -->
+                <div class="feature-item" data-feature="nofog">
+                    <div class="feature-info">
+                        <div class="feature-name">TRICK HEAD</div>
+                        <div class="feature-description">Hỗ Trợ Lock Đầu Cực Cao</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 10 -->
+                <div class="feature-item" data-feature="nightvision">
+                    <div class="feature-info">
+                        <div class="feature-name">AIMHEAD V2</div>
+                        <div class="feature-description">Ghim Đầu Siêu Vip Cho mọi Loại Súng</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 11 -->
+                <div class="feature-item" data-feature="teleport">
+                    <div class="feature-info">
+                        <div class="feature-name">SMOOTH TOUCH</div>
+                        <div class="feature-description">Nhạy Game Hơn Khi Chơi</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 12 -->
+                <div class="feature-item" data-feature="fly">
+                    <div class="feature-info">
+                        <div class="feature-name">WEAPON SENSI</div>
+                        <div class="feature-description">Nhạy Tâm Hơn Cho Các Loại Súng</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 13 -->
+                <div class="feature-item" data-feature="autoloot">
+                    <div class="feature-info">
+                        <div class="feature-name">DRAG NECK</div>
+                        <div class="feature-description">Ghim Cổ Khi Kéo</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 14 -->
+                <div class="feature-item" data-feature="crosshair">
+                    <div class="feature-info">
+                        <div class="feature-name">AIMBOT SCORE</div>
+                        <div class="feature-description">Bật Ngắm Khi Kéo Sẽ Vào Đầu</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Feature 15 -->
+                <div class="feature-item" data-feature="highresolution">
+                    <div class="feature-info">
+                        <div class="feature-name">Đồ Họa Cao</div>
+                        <div class="feature-description">Giảm Lang Khi Bật Độ Hoạ Cao</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" class="feature-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="menu-footer">
+                <div>&copy; 2025 Tùng Dương</div>
+                <a href="#" class="footer-link">Hướng Dẫn</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="icon"><i class="fas fa-check"></i></div>
+        <div class="message" id="notification-message"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Orientation Toggle
+            const menuContainer = document.getElementById('menu-container');
+            const horizontalBtn = document.getElementById('horizontal-btn');
+            const verticalBtn = document.getElementById('vertical-btn');
+            
+            horizontalBtn.addEventListener('click', function() {
+                menuContainer.classList.remove('vertical');
+                horizontalBtn.classList.add('active');
+                verticalBtn.classList.remove('active');
+                localStorage.setItem('orientation', 'horizontal');
+            });
+            
+            verticalBtn.addEventListener('click', function() {
+                menuContainer.classList.add('vertical');
+                verticalBtn.classList.add('active');
+                horizontalBtn.classList.remove('active');
+                localStorage.setItem('orientation', 'vertical');
+            });
+            
+            // Load saved orientation
+            const savedOrientation = localStorage.getItem('orientation');
+            if (savedOrientation === 'vertical') {
+                menuContainer.classList.add('vertical');
+                verticalBtn.classList.add('active');
+                horizontalBtn.classList.remove('active');
+            }
+            
+            // Feature Toggle
+            const featureToggles = document.querySelectorAll('.feature-toggle');
+            featureToggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const featureItem = this.closest('.feature-item');
+                    const featureName = featureItem.querySelector('.feature-name').textContent;
+                    const isEnabled = this.checked;
+                    
+                    // Toggle active class
+                    if (isEnabled) {
+                        featureItem.classList.add('active');
+                    } else {
+                        featureItem.classList.remove('active');
+                    }
+                    
+                    // Save state
+                    localStorage.setItem(`feature_${featureItem.dataset.feature}`, isEnabled);
+                    
+                    // Show notification
+                    showNotification(`${featureName} đã ${isEnabled ? 'bật' : 'tắt'}`);
+                    
+                    // Add ripple effect when enabled
+                    if (isEnabled) {
+                        createRippleEffect(toggle);
+                    }
+                });
+            });
+            
+            // Load saved feature states
+            document.querySelectorAll('.feature-item').forEach(item => {
+                const featureKey = `feature_${item.dataset.feature}`;
+                const savedState = localStorage.getItem(featureKey);
+                
+                if (savedState === 'true') {
+                    const toggle = item.querySelector('.feature-toggle');
+                    toggle.checked = true;
+                    item.classList.add('active');
+                }
+            });
+            
+            // Notification System
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                const notificationMessage = document.getElementById('notification-message');
+                
+                notificationMessage.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Ripple Effect
+            function createRippleEffect(element) {
+                const parent = element.closest('.feature-item');
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100%';
+                ripple.style.height = '100%';
+                ripple.style.top = '0';
+                ripple.style.left = '0';
+                ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.opacity = '1';
+                ripple.style.borderRadius = 'inherit';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                ripple.style.zIndex = '0';
+                
+                parent.appendChild(ripple);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    ripple.style.transform = 'scale(2.5)';
+                    ripple.style.opacity = '0';
+                }, 10);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    parent.removeChild(ripple);
+                }, 700);
+            }
+        });
+    </script>
+</body>
+</html>
+<body style="display:none;" id="app">
+
+<script>
+const key = "tungduong";
+let k = prompt("Nhập key:");
+
+if (k === key) {
+  document.getElementById("app").style.display = "block";
+} else {
+  document.write("Sai key ❌");
+}
+</script>
