@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>HEADLOCK PREMIUM</title>
+
+<style>
+:root {
+  --primary:#FF3B30;
+  --green-btn:#30D158;
+  --glass:rgba(15,15,15,0.65);
+  --glass-border:rgba(255,255,255,0.1);
+  --text:#fff;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#000;
+  color:var(--text);
+  overflow:hidden;
+}
+
+.bg-image{
+  position:fixed;
+  inset:-5%;
+  background:url('https://i.postimg.cc/1XjSvh7G/IMG-0229.png');
+  background-size:cover;
+  filter:blur(8px) brightness(0.35);
+  z-index:-1;
+}
+
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:70px 15px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  opacity:0;
+  pointer-events:none;
+}
+.container.show{opacity:1;pointer-events:auto;}
+
+.header{text-align:center}
+.logo-box img{width:100px}
+.title{font-size:24px;font-weight:900}
+
+.card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  padding:15px;
+  border-radius:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.switch input{display:none}
+.slider{
+  width:50px;height:28px;
+  background:#333;
+  border-radius:20px;
+  position:relative;
+  display:block;
+}
+.slider:before{
+  content:"";
+  width:24px;height:24px;
+  position:absolute;
+  top:2px;left:2px;
+  background:#fff;
+  border-radius:50%;
+  transition:.3s;
+}
+input:checked + .slider{
+  background:var(--primary);
+}
+input:checked + .slider:before{
+  transform:translateX(22px);
+}
+
+.segment{
+  display:flex;
+  background:#111;
+  padding:4px;
+  border-radius:12px;
+}
+.seg-btn{
+  flex:1;
+  border:none;
+  padding:10px;
+  color:#888;
+  background:transparent;
+}
+.seg-btn.active{
+  background:var(--primary);
+  color:#fff;
+}
+
+.social-row{
+  display:flex;
+  gap:10px;
+}
+.social-btn{
+  flex:1;
+  text-align:center;
+  padding:12px;
+  background:rgba(255,255,255,0.1);
+  border-radius:12px;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* LOGIN */
+#lock{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+#lock input{
+  padding:12px;
+  width:250px;
+  border-radius:8px;
+  border:1px solid #333;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+#lock button{
+  width:250px;
+  padding:12px;
+  background:var(--primary);
+  border:none;
+  color:#fff;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.toast{
+  position:fixed;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  color:#000;
+  padding:10px 20px;
+  border-radius:20px;
+  opacity:0;
+  transition:.3s;
+}
+.toast.show{opacity:1}
+</style>
+</head>
+
+<body>
+
+<div class="bg-image"></div>
+
+<!-- LOGIN -->
+<div id="lock">
+  <h2>ĐĂNG NHẬP</h2>
+  <input id="pass" placeholder="Nhập mật khẩu">
+  <button onclick="login()">VÀO HỆ THỐNG</button>
+</div>
+
+<!-- MAIN -->
+<div class="container" id="main">
+
+  <div class="header">
+    <div class="logo-box">
+      <img src="https://i.postimg.cc/1XjSvh7G/IMG-0229.png">
+    </div>
+    <div class="title">HEADLOCK PREMIUM</div>
+  </div>
+
+  <div class="card">
+    <div>🚀 BOOST RAM</div>
+    <label class="switch">
+      <input type="checkbox" onchange="toggle(this,'BOOST RAM')">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="card">
+    <div>🎯 AIMBOT VIP</div>
+    <label class="switch">
+      <input type="checkbox" onchange="toggle(this,'AIMBOT VIP')">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="card">
+    <div>💀 AIMLOCK VIP</div>
+    <label class="switch">
+      <input type="checkbox" onchange="toggle(this,'AIMLOCK VIP')">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="segment">
+    <button class="seg-btn active" onclick="mode('ON')">BẬT</button>
+    <button class="seg-btn" onclick="mode('OFF')">TẮT</button>
+  </div>
+
+  <div class="social-row">
+    <a class="social-btn" href="https://facebook.com">FACEBOOK</a>
+    <a class="social-btn" href="https://zalo.me">ZALO</a>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const PASSWORD = "TUNGDUONG";
+
+function login(){
+  let p = document.getElementById("pass").value;
+  if(p === PASSWORD){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").classList.add("show");
+    toast("Đăng nhập thành công");
+  }else{
+    toast("Sai mật khẩu");
+  }
+}
+
+function toggle(el,name){
+  toast(name + (el.checked ? " BẬT" : " TẮT"));
+}
+
+function mode(m){
+  toast("MODE: " + m);
+}
+
+function toast(t){
+  let x=document.getElementById("toast");
+  x.innerText=t;
+  x.classList.add("show");
+  setTimeout(()=>x.classList.remove("show"),2000);
+}
+</script>
+
+</body>
+</html>
